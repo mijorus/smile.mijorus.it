@@ -14,9 +14,30 @@
 <body>
     <div class="container">
         <div class="readme">
-            <zero-md src="https://raw.githubusercontent.com/mijorus/smile/master/README.md"></zero-md>
+            <zero-md class="zero-md" >
+                <script id="mk" type="text/markdown">
+                    
+                </script>
+            </zero-md>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // execute code inside web component zero-md
+            const zero = document.querySelector('zero-md')
+           
+            fetch('https://raw.githubusercontent.com/mijorus/smile/master/README.md')
+                .then(response => response.text())
+                .then(text => {
+                    // console.log(text);
+                    text = text.replaceAll('docs/','https://raw.githubusercontent.com/mijorus/smile/master/docs/')
+                    document.querySelector('#mk').innerHTML = text;
+                    
+                })
+        });
+    </script>
 </body>
 <style>
     body {
